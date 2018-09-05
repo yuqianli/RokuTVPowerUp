@@ -1,5 +1,8 @@
-#!/bin/sh
+#!/bin/bash
 
+powerUpRoKuTV(){  #Power UP Roku TV Function
+echo "Inside PowerUpRokuTV function"
+sleep 54
 RoKuTVIP="192.168.0.38"
 ping -c 1 $RoKuTVIP
 if [ "$?" = 0 ] ;then
@@ -13,4 +16,24 @@ else
         echo "Turning to Channel 26.1 for Chinese Evening News."
         sleep 5;curl -d '' "http://$RoKuTVIP:8060/launch/tvinput.dtv?ch=26.1"
 fi
+}
 
+
+motion_detection(){ #Motion Dection Function
+currentTime=$(date +%H%M%S)
+motionTime=$(sed -n 1p motion_detected_time.txt) #Reading a text file geneated by Motion library
+timeDif=$(($currentTime-$motionTime))
+
+echo "Curren Time: " $currentTime
+echo "Motion detected time: "  $motionTime
+
+echo "Time Difference: "$timeDif
+
+if [ $timeDif -le 1000 ]; #motion detect within 10 minutes
+then
+ echo 'Motion detected within 10 minutes, powering up the Roku TV';
+ powerUpRoKuTV
+fi
+}
+
+motion_detection
