@@ -31,7 +31,7 @@ echo "Time Difference: "$timeDif
 
 if [ $timeDif -le 1000 ]; #motion detect within 10 minutes
 then
- echo 'Motion detected within 10 minutes, powering up the Roku TV';
+ echo "Motion detected within 10 minutes, powering up the Roku TV"
  powerUpRoKuTV
 fi
 }
