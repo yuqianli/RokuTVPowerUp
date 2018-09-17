@@ -20,14 +20,14 @@ fi
 
 
 motion_detection(){ #Motion Dection Function
-currentTime=$(date +%H%M%S)
+currentTime=$(date +%s)
 motionTime=$(sed -n 1p motion_detected_time.txt) #Reading a text file geneated by Motion library
-timeDif=$(($currentTime-$motionTime))
+timeDif=$((($currentTime-$motionTime)/60))
 
 echo "Curren Time: " $currentTime
 echo "Motion detected time: "  $motionTime
 
-echo "Time Difference: "$timeDif
+echo "Time Difference: "$timeDif "in munutes"
 
 if [ $timeDif -le 1000 ]; #motion detect within 10 minutes
 then
