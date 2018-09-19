@@ -1,9 +1,9 @@
 #!/bin/bash
 
 motion_detection(){ #Motion Dection Function
-currentTime=$(date +%H%M%S)
+currentTime=$(date +%s)
 motionTime=$(sed -n 1p motion_detected_time.txt) #Reading a text file geneated by Motion library
-timeDif=$((($currentTime-$motionTime))/60)
+timeDif=$((($currentTime-$motionTime)/60))
 
 echo "Curren Time: " $currentTime
 echo "Motion detected time: "  $motionTime
